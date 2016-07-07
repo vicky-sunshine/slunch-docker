@@ -18,11 +18,9 @@ RUN touch config/application.yml && \
         token: '${SLACK_TOKEN}' \
         channels: \
           - '${CHANNEL_TOKEN}'\n\n \
-
     development: \
       <<: *defaults \
       neat_setting: 800\n\n \
-
     production: \
       <<: *defaults" >> config/application.yml
 
