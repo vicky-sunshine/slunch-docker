@@ -13,24 +13,24 @@ RUN curl -kL https://github.com/jodeci/slunch/archive/master.tar.gz | tar -xvz &
 
 # Generate environment file
 RUN touch config/application.yml && \
-    echo "defaults: &defaults
-      slack:
-        token: '${SLACK_TOKEN}'
-        channels:
-          - '${CHANNEL_TOKEN}'
+    echo "defaults: &defaults \
+      slack: \
+        token: '${SLACK_TOKEN}' \
+        channels: \
+          - '${CHANNEL_TOKEN}'\n\n \
 
-    development:
-      <<: *defaults
-      neat_setting: 800
+    development: \
+      <<: *defaults \
+      neat_setting: 800\n\n \
 
-    test:
-      <<: *defaults
-
-    production:
+    production: \
       <<: *defaults" >> config/application.yml
 
-# Import Lunch
+# Import Lunch List
 RUN rake import_data:lunch
+
+# Set Crontab Time
+RUN whenever -i
 
 WORKDIR /root/slunch-master
 
